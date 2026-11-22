@@ -58,6 +58,16 @@
               <a class="nav-link" href="/about">Про проєкт</a>
             </li>
 
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Усі квитки", tickets_path, class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to "Додати квиток", new_ticket_path, class: "nav-link" %>
+              </li>
+            <% end %>
+
             <li class="nav-item">
               <a class="nav-link" href="/users/new">Створити користувача</a>
             </li>
@@ -65,6 +75,29 @@
             <li class="nav-item">
               <a class="nav-link" href="/users">Показати всіх користувачів</a>
             </li>
+
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <span class="nav-link">
+                  Вітаємо, <%= current_user.name %>!
+                </span>
+              </li>
+
+              <li class="nav-item">
+                <%= button_to "Вийти",
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: "btn btn-outline-light ms-2" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Увійти", new_user_session_path, class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to "Реєстрація", new_user_registration_path, class: "nav-link" %>
+              </li>
+            <% end %>
 
             <li class="nav-item">
               <%= button_to "Видалити всіх користувачів",

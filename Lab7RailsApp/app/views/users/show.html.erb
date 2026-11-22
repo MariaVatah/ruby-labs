@@ -2,6 +2,42 @@
 
 <%= render @user %>
 
+<h2 class="mt-4 mb-3">Квитки користувача</h2>
+
+<% if @user.tickets.any? %>
+  <div class="list-group">
+    <% @user.tickets.each do |ticket| %>
+      <div class="list-group-item">
+        <h5><%= ticket.movie_title %></h5>
+
+        <p>
+          <strong>Жанр:</strong> <%= ticket.genre %>
+        </p>
+
+        <div class="mt-2">
+          <%= link_to "Переглянути",
+              ticket_path(ticket),
+              class: "btn btn-outline-primary btn-sm" %>
+
+          <% if current_user.admin? || current_user == @user %>
+            <%= link_to "Редагувати",
+                edit_ticket_path(ticket),
+                class: "btn btn-outline-warning btn-sm" %>
+
+            <%= button_to "Видалити",
+                ticket_path(ticket),
+                method: :delete,
+                class: "btn btn-outline-danger btn-sm",
+                data: { turbo_confirm: "Ви впевнені, що хочете видалити цей квиток?" } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Цей користувач ще не створив жодного квитка.</p>
+<% end %>
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %>
 

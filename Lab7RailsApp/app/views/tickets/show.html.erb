@@ -1,0 +1,28 @@
+<h1 class="mb-4"><%= @ticket.movie_title %></h1>
+
+<div class="card">
+  <% if @ticket.image.attached? %>
+    <%= image_tag @ticket.image, class: "card-img-top", style: "max-height: 400px; object-fit: contain;" %>
+  <% end %>
+
+  <div class="card-body">
+    <p><strong>Жанр:</strong> <%= @ticket.genre %></p>
+    <p><strong>Дата та час сеансу:</strong> <%= @ticket.show_time.strftime("%d.%m.%Y %H:%M") %></p>
+    <p><strong>Місце:</strong> <%= @ticket.seat %></p>
+    <p><strong>Ціна:</strong> <%= @ticket.price %> грн</p>
+    <p><strong>Автор:</strong> <%= @ticket.user.name %></p>
+    <p><strong>Опис:</strong></p>
+    <p><%= @ticket.description %></p>
+
+    <% if current_user.admin? || @ticket.user == current_user %>
+      <%= link_to "Редагувати", edit_ticket_path(@ticket), class: "btn btn-warning" %>
+
+      <%= button_to "Видалити", ticket_path(@ticket),
+          method: :delete,
+          class: "btn btn-danger",
+          data: { turbo_confirm: "Ви впевнені, що хочете видалити цей квиток?" } %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to "Назад до всіх квитків", tickets_path, class: "btn btn-secondary mt-3" %>

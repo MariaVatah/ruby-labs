@@ -1,0 +1,52 @@
+<h1 class="mb-4">Додати новий квиток</h1>
+
+<%= form_with model: @ticket do |form| %>
+  <% if @ticket.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @ticket.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :movie_title, "Назва фільму" %>
+    <%= form.text_field :movie_title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :genre, "Жанр" %>
+    <%= form.text_field :genre, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :show_time, "Дата та час сеансу" %>
+    <%= form.datetime_local_field :show_time, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :seat, "Місце" %>
+    <%= form.text_field :seat, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, "Ціна" %>
+    <%= form.number_field :price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, "Опис" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image, "Зображення квитка" %>
+    <%= form.file_field :image, class: "form-control", accept: "image/jpeg,image/png,image/webp" %>
+  </div>
+
+  <%= form.submit "Створити квиток", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Назад до квитків", tickets_path, class: "btn btn-secondary mt-3" %>
