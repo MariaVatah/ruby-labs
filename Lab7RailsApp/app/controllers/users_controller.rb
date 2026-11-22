@@ -67,4 +67,10 @@ class UsersController < ApplicationController
     def user_params
       params.expect(user: [ :name, :email ])
     end
+
+    def destroy_all
+      User.destroy_all
+
+      redirect_to users_path, notice: "Усі користувачі успішно видалені."
+    end
 end

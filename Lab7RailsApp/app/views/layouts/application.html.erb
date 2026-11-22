@@ -66,6 +66,14 @@
               <a class="nav-link" href="/users">Показати всіх користувачів</a>
             </li>
 
+            <li class="nav-item">
+              <%= button_to "Видалити всіх користувачів",
+                  destroy_all_users_path,
+                  method: :delete,
+                  class: "btn btn-danger ms-2",
+                  data: { turbo_confirm: "Ви дійсно хочете видалити всіх користувачів?" } %>
+            </li>
+
           </ul>
         </div>
       </div>
