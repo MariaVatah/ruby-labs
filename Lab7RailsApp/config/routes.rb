@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
   resources :users
   delete "users/destroy_all", to: "users#destroy_all", as: :destroy_all_users
 
