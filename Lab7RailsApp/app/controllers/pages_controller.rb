@@ -13,4 +13,19 @@ class PagesController < ApplicationController
   def about
   end
 
+  def comedy
+  end
+
+  def drama
+  end
+
+  def fantasy
+  end
+
+  def horror
+  end
+
+  def adventure
+  end
+
 end
