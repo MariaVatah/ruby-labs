@@ -1,9 +1,25 @@
 <h2>Жанри фільмів</h2>
 
-<div class="list-group">
-  <%= link_to "Комедія", "/comedy", class: "list-group-item list-group-item-action" %>
-  <%= link_to "Драма", "/drama", class: "list-group-item list-group-item-action" %>
-  <%= link_to "Фантастика", "/fantasy", class: "list-group-item list-group-item-action" %>
-  <%= link_to "Жахи", "/horror", class: "list-group-item list-group-item-action" %>
-  <%= link_to "Пригоди", "/adventure", class: "list-group-item list-group-item-action" %>
-</div>
+<ul class="nav nav-tabs mb-4">
+  <li class="nav-item">
+    <%= link_to "Комедія", "/comedy", class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Драма", "/drama", class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Фантастика", "/fantasy", class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Жахи", "/horror", class: "nav-link" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Пригоди", "/adventure", class: "nav-link" %>
+  </li>
+</ul>
+
+<p>Оберіть жанр фільму, щоб переглянути відповідну сторінку.</p>
