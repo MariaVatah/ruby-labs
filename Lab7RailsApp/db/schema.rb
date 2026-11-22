@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_22_172243) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_22_181323) do
+  create_table "tickets", force: :cascade do |t|
+    t.string "movie_title"
+    t.string "genre"
+    t.datetime "show_time"
+    t.string "seat"
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -22,4 +35,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_172243) do
     t.datetime "remember_created_at"
     t.integer "role", default: 0
   end
+
+  add_foreign_key "tickets", "users"
 end
