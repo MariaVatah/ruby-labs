@@ -57,6 +57,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_all
+      User.destroy_all
+
+      redirect_to users_path, notice: "Усі користувачі успішно видалені."
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -66,11 +72,5 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.expect(user: [ :name, :email ])
-    end
-
-    def destroy_all
-      User.destroy_all
-
-      redirect_to users_path, notice: "Усі користувачі успішно видалені."
     end
 end
