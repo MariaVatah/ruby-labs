@@ -38,8 +38,16 @@
   <p>Цей користувач ще не створив жодного квитка.</p>
 <% end %>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %>
+<% if user_signed_in? && (current_user.admin? || current_user == @user) %>
+  <div>
+    <%= link_to "Редагувати профіль",
+        edit_user_path(@user),
+        class: "btn btn-warning" %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+    <%= button_to "Видалити профіль",
+        @user,
+        method: :delete,
+        class: "btn btn-danger",
+        data: { turbo_confirm: "Ви впевнені?" } %>
+  </div>
+<% end %>
