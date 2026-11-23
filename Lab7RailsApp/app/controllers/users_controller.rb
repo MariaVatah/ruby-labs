@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: [:destroy_all]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :require_admin!, only: [:destroy_all]
 
   # GET /users or /users.json
@@ -61,10 +60,10 @@ class UsersController < ApplicationController
   end
 
   def destroy_all
-      User.destroy_all
+    User.where.not(id: current_user.id).destroy_all
 
-      redirect_to users_path, notice: "Усі користувачі успішно видалені."
-    end
+    redirect_to users_path, notice: "Усі інші користувачі успішно видалені."
+  end
 
   private
 
@@ -76,6 +75,12 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params.expect(:id))
+    end
+
+    def authorize_user!
+      unless current_user.admin? || @user == current_user
+        redirect_to users_path, alert: "У вас немає прав для цієї дії."
+      end
     end
 
     # Only allow a list of trusted parameters through.
