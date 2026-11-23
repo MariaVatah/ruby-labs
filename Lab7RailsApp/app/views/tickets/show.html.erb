@@ -14,7 +14,7 @@
     <p><strong>Опис:</strong></p>
     <p><%= @ticket.description %></p>
 
-    <% if current_user.admin? || @ticket.user == current_user %>
+    <% if user_signed_in? && (current_user.admin? || @ticket.user == current_user) %>
       <%= link_to "Редагувати", edit_ticket_path(@ticket), class: "btn btn-warning" %>
 
       <%= button_to "Видалити", ticket_path(@ticket),

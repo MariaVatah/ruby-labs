@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_action :require_admin!, only: [:destroy_all]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :authorize_ticket!, only: [:edit, :update, :destroy]
@@ -40,7 +41,19 @@ class TicketsController < ApplicationController
     redirect_to tickets_path, notice: "Квиток успішно видалено."
   end
 
+  def destroy_all
+    Ticket.destroy_all
+
+    redirect_to tickets_path, notice: "Усі квитки успішно видалені."
+  end
+
   private
+
+  def require_admin!
+    unless current_user&.admin?
+      redirect_to tickets_path, alert: "Доступ дозволено лише адміністратору."
+    end
+  end
 
   def ticket_params
     params.require(:ticket).permit(

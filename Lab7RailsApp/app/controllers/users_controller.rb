@@ -1,7 +1,7 @@
-class TicketsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_ticket!, only: [:edit, :update, :destroy]
+class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
   before_action :require_admin!, only: [:destroy_all]
 
   # GET /users or /users.json
@@ -64,12 +64,6 @@ class TicketsController < ApplicationController
     User.where.not(id: current_user.id).destroy_all
 
     redirect_to users_path, notice: "Усі інші користувачі успішно видалені."
-  end
-
-  def destroy_all
-    Ticket.destroy_all
-
-    redirect_to tickets_path, notice: "Усі квитки успішно видалені."
   end
 
   private
