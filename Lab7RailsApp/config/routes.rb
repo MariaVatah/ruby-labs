@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :users
   resources :tickets
+  delete "tickets/destroy_all", to: "tickets#destroy_all", as: :destroy_all_tickets
   delete "users/destroy_all", to: "users#destroy_all", as: :destroy_all_users
 
   root "users#index"

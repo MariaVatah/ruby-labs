@@ -108,6 +108,15 @@
                     data: { turbo_confirm: "Ви дійсно хочете видалити всіх користувачів?" } %>
               </li>
             <% end %>
+            <% if user_signed_in? && current_user.admin? %>
+              <li class="nav-item">
+                <%= button_to "Видалити всі квитки",
+                    destroy_all_tickets_path,
+                    method: :delete,
+                    class: "btn btn-danger ms-2",
+                    data: { turbo_confirm: "Ви дійсно хочете видалити всі квитки?" } %>
+              </li>
+            <% end %>
 
           </ul>
         </div>
