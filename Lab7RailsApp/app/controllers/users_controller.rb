@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:destroy_all]
+  before_action :require_admin!, only: [:destroy_all]
 
   # GET /users or /users.json
   def index
@@ -64,6 +67,12 @@ class UsersController < ApplicationController
     end
 
   private
+
+    def require_admin!
+      unless current_user&.admin?
+        redirect_to root_path, alert: "Доступ дозволено лише адміністратору."
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params.expect(:id))

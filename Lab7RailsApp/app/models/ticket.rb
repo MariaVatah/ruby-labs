@@ -7,7 +7,7 @@ class Ticket < ApplicationRecord
   validates :show_time, presence: true
   validates :seat, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :description, length: { maximum: 1000 }, allow_blank: true
+  validates :description, presence: true, length: { minimum: 5, maximum: 1000 }
   validate :acceptable_image
 
   private
